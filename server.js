@@ -12,6 +12,9 @@ mongoose
   .connect(`${dbURL}/${dbName}`, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
+    bufferCommands: false, 
+  bufferMaxEntries: 0, 
+  bufferCommandsTimeout: 0, 
   })
   .then(() => {
     console.log("Connected to MongoDB");
