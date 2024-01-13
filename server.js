@@ -1,21 +1,23 @@
 import express from "express";
 import cors from "cors";
 import mongoose from "mongoose";
-import { MongoClient } from "mongodb";
 
 const app = express();
 const port = 5000;
 
-let dbURL =
-  "mongodb+srv://prateeklalwani005:s02ag0FrhFKBpzSQ@test-db.kiq2tsr.mongodb.net/HFQR";
+const dbURL = "mongodb+srv://prateeklalwani005:s02ag0FrhFKBpzSQ@test-db.kiq2tsr.mongodb.net";
+const dbName = "HFQR";
 
 mongoose
-  .connect(dbURL)
+  .connect(`${dbURL}/${dbName}`, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+  })
   .then(() => {
-    console.log("connected to db");
+    console.log("Connected to MongoDB");
   })
   .catch((err) => {
-    console.log(err);
+    console.error("Error connecting to MongoDB:", err);
   });
 
 const ItemsSchema = new mongoose.Schema({
