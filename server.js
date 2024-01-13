@@ -8,11 +8,7 @@ const port = 5000;
 const dbURL = "mongodb+srv://prateeklalwani005:s02ag0FrhFKBpzSQ@test-db.kiq2tsr.mongodb.net";
 const dbName = "HFQR";
 
-mongoose.connect(`${dbURL}/${dbName}`, {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-  connectTimeoutMS: 30000, // 30 seconds timeout (adjust as needed)
-})
+mongoose.connect(`${dbURL}/${dbName}`)
 
   .then(() => {
     console.log("Connected to MongoDB");
