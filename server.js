@@ -1,12 +1,16 @@
 import express from "express";
 import cors from "cors";
 import mongoose from "mongoose";
+import { MongoClient } from "mongodb";
 
 const app = express();
 const port = 5000;
 
+let dbURL =
+  "mongodb+srv://prateeklalwani005:s02ag0FrhFKBpzSQ@test-db.kiq2tsr.mongodb.net/HFQR";
+
 mongoose
-  .connect("mongodb://127.0.0.1:27017/HFQR")
+  .connect(dbURL)
   .then(() => {
     console.log("connected to db");
   })
@@ -38,7 +42,7 @@ app.post("/addItem", async (req, res) => {
     res.status(200).json(newItem);
   } catch (err) {
     console.error("Error adding item to MongoDB:", err);
-    res.status(500).json({ error: "Internal Server Error", details: err.message });
+    res.status(500).send("Internal Server Error");
   }
 });
 
