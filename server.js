@@ -38,7 +38,7 @@ app.post("/addItem", async (req, res) => {
     res.status(200).json(newItem);
   } catch (err) {
     console.error("Error adding item to MongoDB:", err);
-    res.status(500).send("Internal Server Error");
+    res.status(500).json({ error: "Internal Server Error", details: err.message });
   }
 });
 
