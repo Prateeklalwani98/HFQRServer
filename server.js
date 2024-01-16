@@ -56,9 +56,15 @@ app.get("/getLastSavedUrl", async (req, res) => {
   }
 });
 
-app.get("/", (req, res) => {
-  res.send("Hello World");
+// app.get("/", (req, res) => {
+//   res.send("Hello World");
+// });
+
+// For Express server example
+app.get('/*', function (req, res) {
+  res.sendFile(path.join(__dirname, 'build', 'index.html'));
 });
+
 
 app.listen(port, () => {
   console.log(`Connected to server port: ${port}`);
