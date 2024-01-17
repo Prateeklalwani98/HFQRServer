@@ -79,7 +79,7 @@ import mongoose from "mongoose";
 const app = express();
 const port = 5000;
 
-const dbURL = "mongodb+srv://prateeklalwani005:s02ag0FrhFKBpzSQ@test-db.kiq2tsr.mongodb.net";
+const dbURL = "mongodb+srv://prateeklalwani005:s02ag0FrhFKBpzSQ%40test-db.kiq2tsr.mongodb.net";
 const dbName = "HFQR";
 
 mongoose.connect(`${dbURL}/${dbName}`)
