@@ -109,7 +109,13 @@ app.use(cors());
 app.use(express.json());
 
 // Add the following lines for static file serving
-app.use(express.static(path.join(__dirname, 'public'))); // Replace 'public' with your actual static files directory
+// app.use(express.static(path.join(__dirname, 'public'))); // Replace 'public' with your actual static files directory
+
+const __filename = new URL(import.meta.url).pathname;
+const __dirname = path.dirname(__filename);
+
+app.use(express.static(path.join(__dirname, 'public')));
+
 app.get('/*', (req, res) => {
   res.sendFile(path.join(__dirname, 'public', 'index.html')); // Adjust the file path as needed
 });
