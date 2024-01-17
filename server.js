@@ -75,6 +75,7 @@
 import express from "express";
 import cors from "cors";
 import mongoose from "mongoose";
+import path from "path"; // Add this line for path module
 
 const app = express();
 const port = 5000;
@@ -107,6 +108,12 @@ const CxDetails = mongoose.model("CxDetails", CxDetailsSchema);
 app.use(cors());
 app.use(express.json());
 
+// Add the following lines for static file serving
+app.use(express.static(path.join(__dirname, 'public'))); // Replace 'public' with your actual static files directory
+app.get('/*', (req, res) => {
+  res.sendFile(path.join(__dirname, 'public', 'index.html')); // Adjust the file path as needed
+});
+
 app.post("/addCxDetails", async (req, res) => {
   const { CxName, CxPhoneNumber, CxEmail } = req.body;
 
@@ -130,18 +137,13 @@ app.post("/addCxDetails", async (req, res) => {
 app.get("/getLastSavedUrl", async (req, res) => {
   try {
     const lastSavedItem = await CxDetails.findOne().sort({ _id: -1 }).limit(1);
-    res.json({ lastSavedUrl: lastSavedItem ? lastSavedItem.url : null });
+    res.json({ lastSavedUrl: lastSavedItem ? lastSavedItem.CxEmail : null });
   } catch (err) {
     console.error("Error fetching last saved URL from MongoDB:", err);
     res.status(500).send("Internal Server Error");
   }
 });
 
-app.get('/*', function (req, res) {
-  res.sendFile(path.join(__dirname, 'build', 'index.html'));
-});
-
 app.listen(port, () => {
   console.log(`Connected to server port: ${port}`);
 });
-
